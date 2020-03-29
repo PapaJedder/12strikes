@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1 id='strike'>Ready</h1>
+<button onclick="myFunction()">Start</button>
+
+<script>
+function myFunction() {
+  setInterval(function(){ document.GetElementById('strike').innerText = Math.floor(Math.random() * 12 + 1));}, 3000);
+}
+</script>
+
+
+</body>
+</html>
