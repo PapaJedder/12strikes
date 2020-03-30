@@ -1,16 +1,55 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+  <title>12 Random Strikes Callout</title>
+</head>
+
 <body>
+  <style>
+    * {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
 
-<h1 id='strike'>Ready</h1>
-<button onclick="myFunction()">Start</button>
+    .stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
 
-<script>
-function myFunction() {
-  setInterval(function(){ document.GetElementById('strike').innerText = Math.floor(Math.random() * 12 + 1));}, 3000);
-}
-</script>
+    #strike {
+      font-size: 10em;
+    }
 
+    button {
+      font-size: 3em;
+      padding: 15px;
+    }
+  </style>
+  <div class='stage'>
+    <h1 id='strike'>Ready</h1>
+
+    <button onclick="myFunction()">Start</button>
+  </div>
+  <script>
+    var running = false;
+
+    function myFunction() {
+
+      func = setInterval(function () {
+        var strike = Math.floor(Math.random() * 12 + 1);
+        document.getElementById('strike').innerText = strike;
+      }
+        , 3000);
+    };
+
+    function nextStrike() {
+
+      console.log('changed');
+    };
+  </script>
 
 </body>
+
 </html>
