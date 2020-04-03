@@ -29,11 +29,14 @@
   </style>
   <div class='stage'>
     <h1 id='strike'>Ready</h1>
+
     Select Voice: <select id='voiceList'></select> <br><br>
     <button onclick="myFunction()">Start</button>
   </div>
+
+
   <script>
- var txtInput = document.querySelector('#strike');
+    var txtInput = document.querySelector('#strike');
     var voiceList = document.querySelector('#voiceList');
     var synth = window.speechSynthesis;
     var voices = [];
@@ -61,8 +64,12 @@
     }
 
 
-
     function myFunction() {
+
+      func = setInterval(function () {
+        var strike = Math.floor(Math.random() * 12 + 1);
+        document.getElementById('strike').innerText = strike;
+
         txtInput = document.querySelector('#strike');
 
         var toSpeak = new SpeechSynthesisUtterance(txtInput.innerText);
@@ -73,8 +80,10 @@
           }
         });
         synth.speak(toSpeak);
-              }, 3000);
+      }
+        , 3000);
     };
+
 
   </script>
 
