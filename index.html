@@ -29,25 +29,53 @@
   </style>
   <div class='stage'>
     <h1 id='strike'>Ready</h1>
-
+    Select Voice: <select id='voiceList'></select> <br><br>
     <button onclick="myFunction()">Start</button>
   </div>
   <script>
-    var running = false;
+ var txtInput = document.querySelector('#strike');
+    var voiceList = document.querySelector('#voiceList');
+    var synth = window.speechSynthesis;
+    var voices = [];
+
+    PopulateVoices();
+    if (speechSynthesis !== undefined) {
+      speechSynthesis.onvoiceschanged = PopulateVoices;
+    }
+
+    
+
+    function PopulateVoices() {
+      voices = synth.getVoices();
+      var selectedIndex = voiceList.selectedIndex < 0 ? 0 : voiceList.selectedIndex;
+      voiceList.innerHTML = '';
+      voices.forEach((voice) => {
+        var listItem = document.createElement('option');
+        listItem.textContent = voice.name;
+        listItem.setAttribute('data-lang', voice.lang);
+        listItem.setAttribute('data-name', voice.name);
+        voiceList.appendChild(listItem);
+      });
+
+      voiceList.selectedIndex = selectedIndex;
+    }
+
+
 
     function myFunction() {
+        txtInput = document.querySelector('#strike');
 
-      func = setInterval(function () {
-        var strike = Math.floor(Math.random() * 12 + 1);
-        document.getElementById('strike').innerText = strike;
-      }
+        var toSpeak = new SpeechSynthesisUtterance(txtInput.innerText);
+        var selectedVoiceName = voiceList.selectedOptions[0].getAttribute('data-name');
+        voices.forEach((voice) => {
+          if (voice.name === selectedVoiceName) {
+            toSpeak.voice = voice;
+          }
+        });
+        synth.speak(toSpeak);
         , 3000);
     };
 
-    function nextStrike() {
-
-      console.log('changed');
-    };
   </script>
 
 </body>
